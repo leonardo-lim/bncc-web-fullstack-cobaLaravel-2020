@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@homeView');
+// Route::get('/', 'HomeController@homeView');
 
-Route::get('/register', 'AuthController@registerView');
+// Route::get('/register', 'AuthController@registerView');
 
-Route::get('/welcome', 'AuthController@welcomeView');
+// Route::get('/welcome', 'AuthController@welcomeView');
 
-Route::post('/welcome', 'AuthController@getName');
+// Route::post('/welcome', 'AuthController@getName');
+
+Route::get('/', 'HomeController@tableView');
+
+Route::get('/data-tables', 'HomeController@tableDataView');
