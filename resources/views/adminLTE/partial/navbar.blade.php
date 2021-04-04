@@ -11,6 +11,9 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/data-tables" class="nav-link">Data Tables</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/question" class="nav-link">Question</a>
+            </li>
         </ul>
 
         <!-- SEARCH FORM -->
