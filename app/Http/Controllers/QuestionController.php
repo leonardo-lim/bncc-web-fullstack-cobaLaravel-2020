@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = DB::table('questions')->orderBy('updated_at', 'desc')->get();
+        $questions = Question::all()->sortByDesc('updated_at');
         return view('question.list', compact('questions'));
     }
 
@@ -36,13 +37,12 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('questions')->insert([
-            'title' => $request->title,
-            'content' => $request->content,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+        $request->validate([
+            'title' => 'required | max:255',
+            'content' => 'required | max:255'
         ]);
 
+        Question::create($request->all());
         return redirect(url('/question'))->with('success', 'A question added successfully.');
     }
 
@@ -54,7 +54,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = DB::table('questions')->where('id', $id)->first();
+        $question = Question::find($id);
         return view('question.detail', compact('question'));
     }
 
@@ -66,7 +66,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = DB::table('questions')->where('id', $id)->first();
+        $question = Question::find($id);
         return view('question.edit', compact('question'));
     }
 
@@ -79,11 +79,16 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('questions')->where('id', $id)->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'updated_at' => date('Y-m-d H:i:s')
+        $request->validate([
+            'title' => 'required | max:255',
+            'content' => 'required | max:255'
         ]);
+
+        $question = Question::find($id);
+        $question->title = $request->title;
+        $question->content = $request->content;
+        $question->updated_at = date('Y-m-d H:i:s');
+        $question->save();
 
         return redirect(url('/question'))->with('success', 'A question updated successfully.');
     }
@@ -96,7 +101,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('questions')->delete($id);
+        $question = Question::find($id);
+        $question->delete();
+
         return redirect(url('/question'))->with('success', 'A question deleted successfully.');
     }
 }

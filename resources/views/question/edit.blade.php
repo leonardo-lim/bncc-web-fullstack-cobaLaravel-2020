@@ -13,10 +13,16 @@
                 @method('put')
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="title" value="{{$question->title}}" placeholder="Title">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$question->title}}" placeholder="Title">
+                    @error('title')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="input-group mb-4">
-                    <textarea class="form-control" name="content" placeholder="Content"  rows="5" required>{{$question->content}}</textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror" name="content" placeholder="Content"  rows="5">{{$question->content}}</textarea>
+                    @error('content')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
                 <a href="/question" class="btn btn-info">Cancel</a>
                 <button type="submit" class="btn btn-warning">Update</button>

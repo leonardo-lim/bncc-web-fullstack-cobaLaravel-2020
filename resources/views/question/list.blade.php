@@ -33,9 +33,13 @@
                     <tr>
                         <td scope="col">{{$question->title}}</td>
                         <td>
-                            <a href="{{url('/question/detail') . '/' . $question->id}}" class="btn btn-sm btn-success">Details</a>
-                            <a href="{{url('/question/edit') . '/' . $question->id}}" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="{{url('/question') . '/' . $question->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                            <a href="/question/{{$question->id}}" class="btn btn-sm btn-success">Details</a>
+                            <a href="/question/{{$question->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="/question/{{$question->id}}" method="POST" class="d-inline">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
