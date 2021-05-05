@@ -15,7 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all()->sortByDesc('updated_at');
+        $questions = Question::with('user', 'answer', 'correct_answer', 'tag')->orderBy('updated_at', 'desc')->get();
         return view('question.list', compact('questions'));
     }
 

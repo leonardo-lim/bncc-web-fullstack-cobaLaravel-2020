@@ -10,6 +10,7 @@
         
         <div class="row">
             <div class="col text-center">
+                <a href="{{url('/')}}" class="btn btn-secondary">Back</a>
                 <a href="{{url('/question/create')}}" class="btn btn-primary">Add Question</a>
             </div>
         </div>
@@ -24,13 +25,19 @@
             <table class="table table-hover table-stripped text-center">
                 <thead>
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col" class="h5">No</th>
+                        <th scope="col" class="h5">Title</th>
+                        <th scope="col" class="h5">Handle</th>
                     </tr>
                 </thead>
                 <tbody>
+                
+                @php($count = 0)
+
                 @foreach ($questions as $question)
+                    @php($count++)
                     <tr>
+                        <td scope="col">{{$count}}</td>
                         <td scope="col">{{$question->title}}</td>
                         <td>
                             <a href="/question/{{$question->id}}" class="btn btn-sm btn-success">Details</a>

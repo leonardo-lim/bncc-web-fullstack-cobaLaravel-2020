@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BNCC</title>
-</head>
-<body>
-    <h1>Bina Nusantara Computer Club</h1>
-    <h2>Divisi Learning and Training</h2>
-    <p>Belajar Laravel Bersama</p>
+@extends('layouts.app')
 
-    <h2>Benefit Join di BNCC LnT</h2>
-    <ul>
-        <li>Mendapatkan motivasi dan diskusi sesama peserta</li>
-        <li>Sharing knowledge dari para pengajar</li>
-        <li>Dibuat oleh calon web developer terbaik</li>
-    </ul>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-    <h2>Cara Bergabung ke BNCC LnT</h2>
-    <ol>
-        <li>Mengunjungi Website ini</li>
-        <li>Mendaftar di <a href="/register">Form Sign Up</a></li>
-        <li>Selesai</li>
-    </ol>
-</body>
-</html>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('Accout created successfully.') }}
+                    <a class="nav-link d-inline" href="/">Go to Home Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

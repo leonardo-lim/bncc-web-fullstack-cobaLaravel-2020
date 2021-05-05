@@ -21,4 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@tableView');
 Route::get('/data-tables', 'HomeController@tableDataView');
 
-Route::resource('question', 'QuestionController');
+Route::resource('question', 'QuestionController')->middleware('auth');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
